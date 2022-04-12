@@ -1,6 +1,7 @@
 package guru.springframework.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /** Created by
  *         Thabiso Mapitsi Mokwele
@@ -21,12 +22,31 @@ public class Recipe {
     private String url;
     private String directions;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredientSet;
+
+    public Set<Ingredient> getIngredientSet() {
+        return ingredientSet;
+    }
+
+    public void setIngredientSet(Set<Ingredient> ingredientSet) {
+        this.ingredientSet = ingredientSet;
+    }
 
     //private Difficulty difficulty;
+    @Lob
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;
